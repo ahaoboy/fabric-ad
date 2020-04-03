@@ -90,7 +90,7 @@ class FabCar extends Contract {
         const car = JSON.parse(carAsBytes.toString());
         car.age = newAge;
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
+        await ctx.stub.putState(stuNumber, Buffer.from(JSON.stringify(car)));
         console.info("============= END : changeStuAge ===========");
     }
 }
