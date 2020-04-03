@@ -92,7 +92,7 @@ chmod +x ./scripts/bootstrap.sh
 
 # test-network
 cd test-network
-
+chmod 777 ./ -R
 ./network.sh down
 
 
