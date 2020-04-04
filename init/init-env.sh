@@ -1,5 +1,9 @@
 echo "init env"
 
+# install gcc g++
+sudo apt-get install g++ gcc -y
+
+
 # install node
 apt update
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
