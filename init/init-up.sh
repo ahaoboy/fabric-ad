@@ -1,7 +1,7 @@
 # test-network
 cd ./test-network
 
-chmod 777 ./ -R
+# chmod 777 ./ -R
 
 ./network.sh down
 

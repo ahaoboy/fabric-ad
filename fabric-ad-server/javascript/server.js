@@ -12,9 +12,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const fs = require("fs");
 const cors = require("cors");
 const path = require("path");
+import { getContract } from "./init";
+
 app.use(cors());
 app.use(express.static("./web/dist"));
-const contract = null;
+let  contract = null;
 app.post("/getSource", function(req, res) {
     console.log(req.body, typeof req.body);
     // let data = JSON.parse(req.body)

@@ -7,7 +7,8 @@
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
 const fs = require("fs");
-const contract
+let contract = null;
+
 async function _getContract() {
     try {
         // load the network configuration
@@ -15,6 +16,7 @@ async function _getContract() {
             __dirname,
             "..",
             "..",
+            // "..",
             "test-network",
             "organizations",
             "peerOrganizations",

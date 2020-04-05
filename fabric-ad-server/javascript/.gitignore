@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 /dist
+run-server.js
+run-server.js.map
 
 # Logs
 logs

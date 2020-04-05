@@ -14,3 +14,4 @@ vendor/
 .vscode
 .gradle
 .idea
+**/node_modules/
