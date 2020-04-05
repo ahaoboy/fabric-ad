@@ -1,20 +1,5 @@
-function getIPAdress() {
-    var interfaces = require("os").networkInterfaces();
-    for (var devName in interfaces) {
-        var iface = interfaces[devName];
-        for (var i = 0; i < iface.length; i++) {
-            var alias = iface[i];
-            if (
-                alias.family === "IPv4" &&
-                alias.address !== "127.0.0.1" &&
-                !alias.internal
-            ) {
-                return alias.address;
-            }
-        }
-    }
-}
 
 const PORT = 3000;
-const HOST = `http://${getIPAdress()}`;
-export { PORT, HOST };
+const IP = "172.18.21.209";
+const HOST = "http://172.18.21.209";
+export { PORT, HOST ,IP};

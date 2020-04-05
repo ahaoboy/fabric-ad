@@ -13,7 +13,8 @@
         "build:server": "npx parcel build ./server.js --target node -o run-server.js --out-dir ./",
         "build:web": "cd web && npm run build",
         "build": "npm run build:server && npm run build:web",
-        "start": "npm run build && node ./run-server.js"
+        "genIP": "node genIP.js",
+        "start": "npm run genIP && npm run build && node ./run-server.js"
     },
     "engineStrict": true,
     "author": "Hyperledger",
