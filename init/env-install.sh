@@ -14,9 +14,9 @@ sudo apt-get install -y nodejs
 npm i n -g 
 
 # change node v8
-n 8.5
+# n 8.5
 # n 9.0.0
-# n 10.16.0
+n 10.16.0
 
 
 # install python3

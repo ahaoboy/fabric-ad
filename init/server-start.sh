@@ -8,8 +8,12 @@ npm run build
 
 cd ..
 
+rm wallet/ -r
+mkdir ./wallet
+
 node enrollAdmin
 node registerUser
+
 npm run build:server
 
 node run-server.js

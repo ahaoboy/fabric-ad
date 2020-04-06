@@ -1,14 +1,14 @@
 # bash < <(echo ./init/init-env.sh)
 # bash < <(echo ./init/init-up.sh)
 # bash < <(echo ./init/init-server.sh)
-./init/init-env.sh
+./init/env-install.sh
 source ~/.bashrc
 
-./init/init-up.sh
+./init/net-reset.sh
 source ~/.bashrc
 
-./init/init-up-export.sh
 
+./init/export-env.sh
 source ~/.bashrc
-./init/init-server.sh
 
+./init/server-start.sh
