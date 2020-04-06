@@ -52,9 +52,14 @@ class FabCar extends Contract {
             pwd,
             record: [],
         };
-        await ctx.stub.putState(uid, Buffer.from(JSON.stringify(user)));
+        let res = await ctx.stub.putState(
+            uid,
+            Buffer.from(JSON.stringify(user))
+        );
+        console.log("fabric addUser", uid, pwd, res ? res.toString() : "empty");
+
         console.info("============= END : addUser ===========");
-        return user
+        return user;
     }
 
     /*
@@ -70,11 +75,19 @@ class FabCar extends Contract {
         if (!carAsBytes || carAsBytes.length === 0) {
             throw new Error(`${uid} does not exist`);
         }
+        console.log(
+            "fabric addRecord",
+            uid,
+            record,
+            carAsBytes ? carAsBytes.toString() : "empty"
+        );
+
         const car = JSON.parse(carAsBytes.toString());
         car.record.push(record);
         await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
+
         console.info("============= END : addRecord ===========");
-        return car
+        return car;
     }
 
     async getUser(ctx, uid) {
@@ -83,6 +96,11 @@ class FabCar extends Contract {
             // throw new Error(`${uid} does not exist`);
             return false;
         }
+        console.log(
+            "fabric getUser",
+            uid,
+            carAsBytes ? carAsBytes.toString() : "empty"
+        );
         const car = JSON.parse(carAsBytes.toString());
         return await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
     }
