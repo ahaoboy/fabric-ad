@@ -1,5 +1,5 @@
 
 const PORT = 3000;
-const IP = "172.18.21.209";
-const HOST = "http://172.18.21.209";
+const IP = "149.28.150.7";
+const HOST = `http://${IP}`;
 export { PORT, HOST ,IP};

@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vue-cli-service serve  --nolint",
-        "build": "vue-cli-service build --nolint",
+        "serve": "vue-cli-service serve  --no-lint",
+        "build": "vue-cli-service build --no-lint",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
