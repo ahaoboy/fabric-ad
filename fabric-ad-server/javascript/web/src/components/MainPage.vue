@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>index</h1>
+    <h1>MainPage</h1>
     <div class="aid" @click="click">{{aid}}</div>
   </div>
 </template>
@@ -28,6 +28,10 @@ export default {
   },
   created() {
     this.aid = getAid();
+    let uid = localStorage.getItem("uid");
+    if (!uid) {
+      this.$router.push("/addUser");
+    }
   }
 };
 </script>
