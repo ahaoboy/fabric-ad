@@ -50,7 +50,6 @@ async function main() {
         const network = await gateway.getNetwork("mychannel");
 
         // Get the contract from the network.
-        const contract = network.getContract("fabcar");
 
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
@@ -62,6 +61,7 @@ async function main() {
         let p  = []
         for (let i = 0; i < COUNT; i++) {
             let uid = "testUser" + i;
+            const contract = network.getContract("fabcar");
             p.push(contract.submitTransaction("addUser", uid, uid));
         }
         await Promise.all(p)
@@ -81,3 +81,4 @@ async function main() {
 }
 
 main();
+
