@@ -6,5 +6,9 @@ source ~/.bashrc
 
 ./init/init-up.sh
 source ~/.bashrc
+
+./init/init-up-export.sh
+
+source ~/.bashrc
 ./init/init-server.sh
 

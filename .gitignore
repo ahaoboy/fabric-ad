@@ -15,3 +15,6 @@ vendor/
 .gradle
 .idea
 **/node_modules/
+
+./fabric-ad-server/javascript/config.js
+./fabric-ad-server/javascript/web/config.js

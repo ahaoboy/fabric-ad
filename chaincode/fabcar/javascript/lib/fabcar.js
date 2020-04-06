@@ -40,6 +40,7 @@ class FabCar extends Contract {
                 Buffer.from(
                     JSON.stringify({
                         uid,
+                        docType: "stu",
                     })
                 )
             );
