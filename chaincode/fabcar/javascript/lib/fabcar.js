@@ -12,16 +12,16 @@ class FabCar extends Contract {
         const cars = [
             {
                 name: "a",
-                age: 1
+                age: 1,
             },
             {
                 name: "b",
-                age: 1
+                age: 1,
             },
             {
                 name: "c",
-                age: 1
-            }
+                age: 1,
+            },
         ];
 
         for (let i = 0; i < cars.length; i++) {
@@ -44,13 +44,54 @@ class FabCar extends Contract {
         return carAsBytes.toString();
     }
 
+    // 添加一个用户的记录
+    async addUser(ctx, uid, pwd) {
+        console.info("============= START : addUser ===========");
+        let user = {
+            uid,
+            pwd,
+            record: [],
+        };
+        await ctx.stub.putState(uid, Buffer.from(JSON.stringify(user)));
+        console.info("============= END : addUser ===========");
+    }
+
+    /*
+        ad : {
+            time, 点击时间
+            ip,
+            aid,  广告标示
+        }
+    */
+    async addRecord(ctx, uid, record) {
+        console.info("============= START : addRecord ===========");
+        const carAsBytes = await ctx.stub.getState(uid); // get the car from chaincode state
+        if (!carAsBytes || carAsBytes.length === 0) {
+            throw new Error(`${uid} does not exist`);
+        }
+        const car = JSON.parse(carAsBytes.toString());
+        car.record.push(record);
+        await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
+        console.info("============= END : addRecord ===========");
+    }
+
+    async getUser(ctx, uid) {
+        const carAsBytes = await ctx.stub.getState(uid); // get the car from chaincode state
+        if (!carAsBytes || carAsBytes.length === 0) {
+            // throw new Error(`${uid} does not exist`);
+            return false;
+        }
+        const car = JSON.parse(carAsBytes.toString());
+        return await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
+    }
+
     async createStu(ctx, stuNumber, name, age) {
         console.info("============= START : Create Stu ===========");
 
         const car = {
             name,
             docType: "stu",
-            age
+            age,
         };
 
         await ctx.stub.putState(stuNumber, Buffer.from(JSON.stringify(car)));
@@ -78,7 +119,6 @@ class FabCar extends Contract {
         console.info(allResults);
         return JSON.stringify(allResults);
     }
-
 
     async changeStuAge(ctx, stuNumber, newAge) {
         console.info("============= START : changeStuAge ===========");

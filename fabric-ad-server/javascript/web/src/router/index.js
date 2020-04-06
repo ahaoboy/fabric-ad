@@ -1,14 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
+import Admin from "../components/Admin.vue";
+import MainPage from "../components/MainPage.vue";
+import Login from "../components/Login.vue";
+import AddUser from "../components/AddUser.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: "/",
-        name: "Home",
-        component: Home
+        name: "MainPage",
+        component: MainPage
+    },
+    {
+        path: "/MainPage",
+        name: "MainPage",
+        component: MainPage
+    },
+    {
+        path: "/admin",
+        name: "Admin",
+        component: Admin
+    },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login
+    },
+    {
+        path: "/addUser",
+        name: "AddUser",
+        component: AddUser
     },
     {
         path: "/about",
