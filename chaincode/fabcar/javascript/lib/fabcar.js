@@ -37,6 +37,7 @@ class FabCar extends Contract {
         for (let i = 0; i < 3; i++) {
             let uid = "testUser" + i;
             await ctx.stub.putState(
+                uid,
                 Buffer.from(
                     JSON.stringify({
                         uid,
