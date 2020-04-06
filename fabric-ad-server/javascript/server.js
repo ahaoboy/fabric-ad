@@ -117,9 +117,10 @@ app.post("/getUser", async function (req, res) {
 async function main() {
     try {
         contract = await getContract();
-
         app.listen(PORT, () =>
-            console.log(`Example app listening on port ${PORT}! HOST:${HOST}`)
+            console.log(
+                `APP URL: ${HOST}:${PORT}/#/addUser`
+            )
         );
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

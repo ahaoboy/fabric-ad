@@ -30,8 +30,21 @@ class FabCar extends Contract {
                 "STU" + i,
                 Buffer.from(JSON.stringify(cars[i]))
             );
+
             console.info("Added <--> ", cars[i]);
         }
+
+        for (let i = 0; i < 10; i++) {
+            let uid = "testUser" + i;
+            await ctx.stub.putState(
+                Buffer.from(
+                    JSON.stringify({
+                        uid,
+                    })
+                )
+            );
+        }
+
         console.info("============= END : Initialize Ledger Stu===========");
     }
 

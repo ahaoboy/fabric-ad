@@ -61,7 +61,9 @@ async function main() {
         let COUNT = 100;
         for (let i = 0; i < COUNT; i++) {
             let uid = "testUser" + i;
-            await contract.submitTransaction("addUser", uid, uid);
+            await contract.evaluateTransaction("getUser", uid);
+
+            // await contract.submitTransaction("addUser", uid, uid);
         }
         let ed = +new Date();
         console.log(
