@@ -16,7 +16,8 @@ import { getContract } from "./init";
 
 app.use(cors());
 app.use(express.static("./web/dist"));
-let contract = null;
+
+
 app.post("/getSource", function (req, res) {
     console.log(req.body, typeof req.body);
     // let data = JSON.parse(req.body)
@@ -31,7 +32,7 @@ app.post("/getSource", function (req, res) {
 });
 
 app.post("/queryAllStus", async function (req, res) {
-    let result = await contract.evaluateTransaction("queryAllStus");
+    let result = await getContract().evaluateTransaction("queryAllStus");
     result = JSON.parse(result.toString());
 
     /*
@@ -45,8 +46,8 @@ app.post("/queryAllStus", async function (req, res) {
 
 app.post("/addUser", async function (req, res) {
     let { uid, pwd } = req.body;
-    let result = await contract.submitTransaction("addUser", uid, pwd);
-    // let result = await contract.evaluateTransaction("queryAllStus");
+    let result = await getContract().submitTransaction("addUser", uid, pwd);
+    // let result = await getContract.evaluateTransaction("queryAllStus");
     result = JSON.parse(result.toString());
     console.log(
         "server addUser",
@@ -88,7 +89,7 @@ app.post("/addRecord", async function (req, res) {
         ip: get_client_ip(req),
         aid,
     };
-    let result = await contract.submitTransaction(
+    let result = await getContract().submitTransaction(
         "addRecord",
         uid,
         JSON.stringify(record)
@@ -101,7 +102,7 @@ app.post("/addRecord", async function (req, res) {
 
 app.post("/getUser", async function (req, res) {
     let { uid } = req.body;
-    let result = await contract.evaluateTransaction("getUser", uid);
+    let result = await getContract().evaluateTransaction("getUser", uid);
     result = JSON.parse(result.toString());
     console.log("server getUser", result ? result.toString() : "empty");
     res.json(result);
@@ -116,7 +117,7 @@ app.post("/getUser", async function (req, res) {
 
 async function main() {
     try {
-        contract = await getContract();
+        // contract = await getContract();
         app.listen(PORT, () =>
             console.log(
                 `APP URL: ${HOST}:${PORT}/#/addUser`

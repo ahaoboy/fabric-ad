@@ -62,6 +62,7 @@ async function main() {
         let p  = []
         for (let i = 0; i < COUNT; i++) {
             let uid = "testUser" + i;
+            console.log(i)
             p.push(contract.submitTransaction("addUser", uid, uid));
         }
         await Promise.all(p)

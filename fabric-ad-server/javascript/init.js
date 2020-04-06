@@ -7,9 +7,10 @@
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
 const fs = require("fs");
-let contract = null;
+const walletPath = path.join(process.cwd(), "wallet");
 
-async function _getContract() {
+let wallet = null;
+export async function getContract() {
     try {
         // load the network configuration
         const ccpPath = path.resolve(
@@ -26,9 +27,9 @@ async function _getContract() {
         const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), "wallet");
-        const wallet = await Wallets.newFileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
+        if (!wallet) wallet = await Wallets.newFileSystemWallet(walletPath);
+
+        // console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
         const identity = await wallet.get("appUser");
@@ -45,7 +46,7 @@ async function _getContract() {
         await gateway.connect(ccp, {
             wallet,
             identity: "appUser",
-            discovery: { enabled: true, asLocalhost: true }
+            discovery: { enabled: true, asLocalhost: true },
         });
 
         // Get the network (channel) our contract is deployed to.
@@ -53,8 +54,8 @@ async function _getContract() {
 
         // Get the contract from the network.
         contract = network.getContract("fabcar");
-        
-        return contract
+
+        return contract;
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
@@ -62,16 +63,10 @@ async function _getContract() {
         // const result = await contract.evaluateTransaction('queryAllCars');
         // const result = await contract.evaluateTransaction("queryAllStus");
         // console.log(
-            // `Transaction has been evaluated, result is: ${result.toString()}`
+        // `Transaction has been evaluated, result is: ${result.toString()}`
         // );
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
         process.exit(1);
     }
-}
-
-export async function getContract() {
-    if (contract) return contract;
-
-    return await _getContract();
 }
