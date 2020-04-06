@@ -71,6 +71,7 @@ class FabCar extends Contract {
     */
     async addRecord(ctx, uid, record) {
         console.info("============= START : addRecord ===========");
+        record = JSON.parse(record);
         const carAsBytes = await ctx.stub.getState(uid); // get the car from chaincode state
         if (!carAsBytes || carAsBytes.length === 0) {
             throw new Error(`${uid} does not exist`);
@@ -102,7 +103,7 @@ class FabCar extends Contract {
             carAsBytes ? carAsBytes.toString() : "empty"
         );
         const car = JSON.parse(carAsBytes.toString());
-        return await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
+        return car;
     }
 
     async createStu(ctx, stuNumber, name, age) {

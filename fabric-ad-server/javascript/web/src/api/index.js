@@ -24,7 +24,7 @@ export function addUser(uid, pwd) {
 export function addRecord(uid, aid) {
     console.log("axios addRecord", uid, aid);
 
-    let url = "/addUser";
+    let url = "/addRecord";
     return axios.post(url, {
         uid,
         aid
