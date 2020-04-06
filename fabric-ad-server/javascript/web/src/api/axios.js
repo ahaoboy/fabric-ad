@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOST, PORT } from "../../../config";
+import { HOST, PORT } from "../config";
 
 axios.defaults.baseURL = `${HOST}:${PORT}`;
 // 响应拦截

@@ -31,3 +31,4 @@ export { PORT, HOST ,IP};
 `;
 
 fs.writeFileSync("./config.js", str, "utf8");
+fs.writeFileSync("./web/src/config.js", str, "utf8");
