@@ -3,7 +3,7 @@
  */
 
 "use strict";
-import { PORT } from "./config";
+import { PORT, HOST } from "./config";
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser"); //解析,用req.body获取post参数
@@ -45,9 +45,10 @@ app.post("/queryAllStus", async function (req, res) {
 
 app.post("/addUser", async function (req, res) {
     let { uid, pwd } = req.body;
-    let result = await contract.submitTransaction("addUser", uid, pwd);
+    let result = await contract.evaluateTransaction("addUser", uid, pwd);
     // let result = await contract.evaluateTransaction("queryAllStus");
     result = JSON.parse(result.toString());
+    console.log("server addUser", uid, pwd, result ? result.toString() : "empty");
     res.json(result);
 });
 
@@ -82,9 +83,10 @@ app.post("/addRecord", async function (req, res) {
         ip: get_client_ip(req),
         aid,
     };
-    let result = await contract.submitTransaction("addUser", uid, record);
+    let result = await contract.evaluateTransaction("addUser", uid, record);
     // let result = await contract.evaluateTransaction("queryAllStus");
-    result = JSON.parse(result.toString());
+    // result = JSON.parse(result.toString());
+    console.log("server addRecord", uid, pwd, result ? result.toString() : "empty");
     res.json(result);
 });
 
@@ -92,6 +94,7 @@ app.post("/getUser", async function (req, res) {
     let { uid } = req.body;
     let result = await contract.evaluateTransaction("getUser", uid);
     result = JSON.parse(result.toString());
+    console.log("server getUser", getUser, result ? result.toString() : "empty");
     res.json(result);
 });
 
@@ -107,7 +110,7 @@ async function main() {
         contract = await getContract();
 
         app.listen(PORT, () =>
-            console.log(`Example app listening on port ${PORT}!`)
+            console.log(`Example app listening on port ${PORT}! HOST:${HOST}`)
         );
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

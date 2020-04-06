@@ -1,5 +1,11 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
+### start
+- git clone https://github.com/ahaoboy/fabric-ad.git
+- cd fabric-ad
+- ./start.sh
+
+
 ## Hyperledger Fabric Samples
 
 Please visit the [installation instructions](http://hyperledger-fabric.readthedocs.io/en/latest/install.html)

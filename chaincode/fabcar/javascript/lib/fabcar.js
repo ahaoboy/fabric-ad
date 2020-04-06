@@ -54,6 +54,7 @@ class FabCar extends Contract {
         };
         await ctx.stub.putState(uid, Buffer.from(JSON.stringify(user)));
         console.info("============= END : addUser ===========");
+        return user
     }
 
     /*
@@ -73,6 +74,7 @@ class FabCar extends Contract {
         car.record.push(record);
         await ctx.stub.putState(uid, Buffer.from(JSON.stringify(car)));
         console.info("============= END : addRecord ===========");
+        return car
     }
 
     async getUser(ctx, uid) {
