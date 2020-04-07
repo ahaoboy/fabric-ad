@@ -23,8 +23,8 @@ sub.pipe(
     concatMap(async ([name, ...args]) => {
         let c = await getContract();
         return from(c[name](...args));
-    }).subscribe((x) => console.log("====suc====", x))
-);
+    })
+).subscribe((x) => console.log("====suc====", x));
 
 app.use(cors());
 app.use(express.static("./web/dist"));
