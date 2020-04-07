@@ -48,14 +48,15 @@ export async function getContract() {
             identity: "appUser",
             discovery: { enabled: true, asLocalhost: true },
         });
-
+        
+        return gateway
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork("mychannel");
+    //     const network = await gateway.getNetwork("mychannel");
 
-        // Get the contract from the network.
-        contract = network.getContract("fabcar");
+    //     // Get the contract from the network.
+    //    let contract = network.getContract("fabcar");
 
-        return contract;
+    //     return contract;
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')

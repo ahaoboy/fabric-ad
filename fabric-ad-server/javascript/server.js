@@ -21,8 +21,14 @@ const { map, concatMap, tap } = require("rxjs/operators");
 sub.pipe(
     tap((x) => console.log("====tap====", x)),
     concatMap(async ([name, ...args]) => {
-        let c = await getContract();
-        return from(c[name](...args));
+        let gateway = await getContract();
+        console.log("name", name, "...args", ...args);
+        const network = await gateway.getNetwork("mychannel");
+        // Get the contract from the network.
+        let contract = network.getContract("fabcar");
+        let res = await contract[name](...args);
+        await gateway.disconnect();
+        return res;
     })
 ).subscribe((x) => console.log("====suc====", x));
 
