@@ -14,9 +14,20 @@ const cors = require("cors");
 const path = require("path");
 import { getContract } from "./init";
 
+const { Subject, from } = require("rxjs");
+const sub = new Subject();
+const { map, concatMap, tap } = require("rxjs/operators");
+
+sub.pipe(
+    tap((x) => console.log("====tap====", x)),
+    concatMap(async ([name, ...args]) => {
+        let c = await getContract();
+        return from(c[name](...args));
+    }).subscribe((x) => console.log("====suc====", x))
+);
+
 app.use(cors());
 app.use(express.static("./web/dist"));
-
 
 app.post("/getSource", function (req, res) {
     console.log(req.body, typeof req.body);
@@ -46,16 +57,18 @@ app.post("/queryAllStus", async function (req, res) {
 
 app.post("/addUser", async function (req, res) {
     let { uid, pwd } = req.body;
-    let result = await getContract().submitTransaction("addUser", uid, pwd);
+    sub.next(["submitTransaction", "addUser", uid, pwd]);
+    res.json("ok");
+    // let result = await getContract().submitTransaction("addUser", uid, pwd);
     // let result = await getContract.evaluateTransaction("queryAllStus");
-    result = JSON.parse(result.toString());
-    console.log(
-        "server addUser",
-        uid,
-        pwd,
-        result ? result.toString() : "empty"
-    );
-    res.json(result);
+    // result = JSON.parse(result.toString());
+    // console.log(
+    // "server addUser",
+    // uid,
+    // pwd,
+    // result ? result.toString() : "empty"
+    // );
+    // res.json(result);
 });
 
 /*
@@ -89,15 +102,20 @@ app.post("/addRecord", async function (req, res) {
         ip: get_client_ip(req),
         aid,
     };
-    let result = await getContract().submitTransaction(
-        "addRecord",
-        uid,
-        JSON.stringify(record)
-    );
+
+    // let result = await getContract().submitTransaction(
+    //     "addRecord",
+    //     uid,
+    //     JSON.stringify(record)
+    // );
+
+    sub.next(["submitTransaction", "addRecord", uid, JSON.stringify(record)]);
+    res.json("ok");
+
     // let result = await contract.evaluateTransaction("queryAllStus");
     // result = JSON.parse(result.toString());
-    console.log("server addRecord", uid, result ? result.toString() : "empty");
-    res.json(result);
+    // console.log("server addRecord", uid, result ? result.toString() : "empty");
+    // res.json(result);
 });
 
 app.post("/getUser", async function (req, res) {
@@ -119,9 +137,7 @@ async function main() {
     try {
         // contract = await getContract();
         app.listen(PORT, () =>
-            console.log(
-                `APP URL: ${HOST}:${PORT}/#/addUser`
-            )
+            console.log(`APP URL: ${HOST}:${PORT}/#/addUser`)
         );
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

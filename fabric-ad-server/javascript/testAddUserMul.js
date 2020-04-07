@@ -52,6 +52,7 @@ async function main() {
         let p  = []
         for (let i = 0; i < COUNT; i++) {
             let uid = "testUser" + i;
+    
             const walletPath = path.join(process.cwd(), "wallet");
             const wallet = await Wallets.newFileSystemWallet(walletPath);
             console.log(`Wallet path: ${walletPath}`);
