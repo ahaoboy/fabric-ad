@@ -49,8 +49,15 @@ app.post("/getSource", function (req, res) {
 });
 
 app.post("/queryAllStus", async function (req, res) {
-    let result = await getContract().evaluateTransaction("queryAllStus");
+    let gateway = await getContract();
+    console.log("name", name, "...args", ...args);
+    const network = await gateway.getNetwork("mychannel");
+    // Get the contract from the network.
+    let contract = await network.getContract("fabcar");
+
+    let result = await contract.evaluateTransaction("queryAllStus");
     result = JSON.parse(result.toString());
+    await gateway.disconnect();
 
     /*
 [   
@@ -126,8 +133,17 @@ app.post("/addRecord", async function (req, res) {
 
 app.post("/getUser", async function (req, res) {
     let { uid } = req.body;
-    let result = await getContract().evaluateTransaction("getUser", uid);
+
+    let gateway = await getContract();
+    console.log("name", name, "...args", ...args);
+    const network = await gateway.getNetwork("mychannel");
+    // Get the contract from the network.
+    let contract = await network.getContract("fabcar");
+
+    let result = await contract.evaluateTransaction("getUser", uid);
     result = JSON.parse(result.toString());
+    await gateway.disconnect();
+
     console.log("server getUser", result ? result.toString() : "empty");
     res.json(result);
 });
