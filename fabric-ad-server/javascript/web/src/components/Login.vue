@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>login</h1>
-
     <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="uid">
         <el-input type="text" v-model="ruleForm.uid" autocomplete="off"></el-input>
@@ -55,7 +54,7 @@ export default {
       if (user.pwd === pwd) {
         localStorage.setItem("uid", uid);
         localStorage.setItem("pwd", pwd);
-        
+
         this.$router.push("/");
         return;
       }
