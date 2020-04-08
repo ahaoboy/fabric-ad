@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "nyc mocha --recursive",
+    "test": "node testGetUser.js && node testAddUserMul.js",
     "build:server": "npx parcel build ./server.js --target node -o run-server.js --out-dir ./",
     "build:web": "cd web && npm run build",
     "build": "npm run build:server && npm run build:web",

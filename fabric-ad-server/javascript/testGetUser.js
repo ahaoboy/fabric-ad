@@ -39,18 +39,6 @@ async function main() {
         }
 
         // Create a new gateway for connecting to our peer node.
-        const gateway = new Gateway();
-        await gateway.connect(ccp, {
-            wallet,
-            identity: "appUser",
-            discovery: { enabled: true, asLocalhost: true },
-        });
-
-        // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork("mychannel");
-
-        // Get the contract from the network.
-        const contract = network.getContract("fabcar");
 
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
@@ -61,8 +49,20 @@ async function main() {
         let COUNT = 100;
         for (let i = 0; i < COUNT; i++) {
             let uid = "testUser" + i;
-            await contract.evaluateTransaction("getUser", uid);
 
+            const gateway = new Gateway();
+            await gateway.connect(ccp, {
+                wallet,
+                identity: "appUser",
+                discovery: { enabled: true, asLocalhost: true },
+            });
+
+            // Get the network (channel) our contract is deployed to.
+            const network = await gateway.getNetwork("mychannel");
+
+            // Get the contract from the network.
+            const contract = network.getContract("fabcar");
+            await contract.evaluateTransaction("getUser", uid);
             // await contract.submitTransaction("addUser", uid, uid);
         }
         let ed = +new Date();
