@@ -1,69 +1,70 @@
 <template>
   <div>
-    <h1>MainPage</h1>
+    <center>
+      <h1>基于区块链和智能合约技术的防欺诈广告</h1>
+      <h1>点击审查方案的研究与实现</h1>
+    </center>
 
-    <router-link class="el-link" to="/admin">admin</router-link> &nbsp;&nbsp;&nbsp;
-    <router-link class="el-link" to="/addUser">addUser</router-link> &nbsp;&nbsp;&nbsp;
-    <router-link class="el-link" to="/login">login</router-link> &nbsp;&nbsp;&nbsp;
+    <el-tabs type="card" v-model="activeName" @tab-click="handleClick($event)">
 
-    <div @click="click">{{ad.aid || ""}}</div>
-    <div class="aid" :style="`background-image: url('${ad.url || ''}')` " @click="click"></div>
-
-    <el-button @click="refresh">刷新</el-button>
+      <el-tab-pane label="注册" name="addUser">
+        <addUser @addUser="addUser"></addUser>
+      </el-tab-pane>
+      <el-tab-pane label="登录" name="login">
+        <login></login>
+      </el-tab-pane>
+      <el-tab-pane label="主页" name="click">
+        <ClickPage></ClickPage>
+      </el-tab-pane>
+      <el-tab-pane label="管理" name="admin">
+        <admin></admin>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
-  import {addRecord} from "../api";
+  import Admin from './Admin'
+  import ClickPage from "./ClickPage";
+  import AddUser from "./AddUser";
+  import Login from "./Login";
 
-  let urls = {
-    'xiaomi': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/1200px-Xiaomi_logo.svg.png',
-    'apple': "http://cdn.osxdaily.com/wp-content/uploads/2017/08/apple-event-2017-september-logo-610x659.jpg",
-    'huawei': "http://img.cnmo-img.com.cn/453_500x375/452381.jpg"
-  }
-
-  function getAid() {
-    let aids = Object.keys(urls)
-    let i = parseInt(Math.random() * aids.length);
-    return {
-      aid: aids[i],
-      url: urls[aids[i]]
-    };
+  const components = {
+    Admin, ClickPage, AddUser, Login
   }
 
   export default {
+    components,
     data() {
       return {
-        ad: {}
+        activeName: 'login'
       };
     },
     methods: {
-      click() {
-        let uid = localStorage.getItem("uid");
-        addRecord(uid, this.ad.aid);
+      handleClick(e) {
+        console.log(' handleClick e', this.activeName)
+        let isLogin = localStorage.getItem('uid')
+        let needVali = ['admin', 'click'].includes(this.activeName)
+        if (needVali && !isLogin) {
+          console.log('need login')
+          this.$message('请先进行登录')
+          this.$nextTick(
+            () => this.activeName = 'addUser'
+          )
+        }
       },
-      refresh() {
-        this.ad = getAid();
+      addUser(user) {
+        console.log('user', user)
+        if (user) {
+          this.activeName = 'click'
+        }
       }
     },
     created() {
-      // this.ad = getAid();
-      this.refresh()
-      let uid = localStorage.getItem("uid");
-      if (!uid) {
-        this.$router.push("/addUser");
-      }
     }
   };
 </script>
 
 <style>
-  .aid {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    /*background: gray;*/
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>login</h1>
     <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="uid">
         <el-input type="text" v-model="ruleForm.uid" autocomplete="off"></el-input>
@@ -23,46 +22,46 @@
 </template>
 
 <script>
-import { getUser } from "../api";
+  import {getUser} from "../api";
 
-export default {
-  data() {
-    return {
-      ruleForm: {
-        uid: "",
-        pwd: ""
-        // pass: "",
-        // checkPass: "",
-        // age: ""
-      }
-    };
-  },
-  methods: {
-    resetForm(user) {
-      console.log("resetForm", user);
-
-      this[user].uid = "";
-      this[user].pwd = "";
+  export default {
+    data() {
+      return {
+        ruleForm: {
+          uid: "",
+          pwd: ""
+          // pass: "",
+          // checkPass: "",
+          // age: ""
+        }
+      };
     },
-    async submitForm(name) {
-      let { uid, pwd } = this[name];
-      console.log("submitForm", uid, pwd);
-      //   await addUser(uid, pwd);
+    methods: {
+      resetForm(user) {
+        console.log("resetForm", user);
 
-      let user = await getUser(uid);
+        this[user].uid = "";
+        this[user].pwd = "";
+      },
+      async submitForm(name) {
+        let {uid, pwd} = this[name];
+        console.log("submitForm", uid, pwd);
+        //   await addUser(uid, pwd);
 
-      if (user.pwd === pwd) {
-        localStorage.setItem("uid", uid);
-        localStorage.setItem("pwd", pwd);
+        let user = await getUser(uid);
 
-        this.$router.push("/");
-        return;
+        if (user.pwd === pwd) {
+          localStorage.setItem("uid", uid);
+          localStorage.setItem("pwd", pwd);
+
+          this.$router.push("/");
+          return;
+        }
+
+        console.log("密码错误", user, uid, pwd);
       }
-
-      console.log("密码错误", user, uid, pwd);
     }
-  }
-};
+  };
 </script>
 
 <style>

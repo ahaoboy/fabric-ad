@@ -1,15 +1,6 @@
 <template>
   <div>
-    <h1>admin</h1>
-
-    <router-link class="el-link" to="/">home</router-link> &nbsp;&nbsp;&nbsp;
-    <router-link class="el-link" to="/addUser">addUser</router-link> &nbsp;&nbsp;&nbsp;
-    <router-link class="el-link" to="/login">login</router-link> &nbsp;&nbsp;&nbsp;
-
-
     <el-button @click="refresh">刷新</el-button>
-
-
     <el-table
       :row-class-name="tableRowClassName"
       :data="tableData"
