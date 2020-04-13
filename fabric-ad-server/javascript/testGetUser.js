@@ -56,10 +56,8 @@ async function main() {
                 identity: "appUser",
                 discovery: { enabled: true, asLocalhost: true },
             });
-
             // Get the network (channel) our contract is deployed to.
             const network = await gateway.getNetwork("mychannel");
-
             // Get the contract from the network.
             const contract = network.getContract("fabcar");
             await contract.evaluateTransaction("getUser", uid);
@@ -73,7 +71,7 @@ async function main() {
             ed - st
         );
         // Disconnect from the gateway.
-        await gateway.disconnect();
+        // await gateway.disconnect();
     } catch (error) {
         console.error(`Failed to submit transaction: ${error}`);
         process.exit(1);

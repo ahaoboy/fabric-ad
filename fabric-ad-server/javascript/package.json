@@ -7,8 +7,6 @@
     "npm": ">=5"
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
     "test": "node testGetUser.js && node testAddUserMul.js",
     "build:server": "npx parcel build ./server.js --target node -o run-server.js --out-dir ./",
     "build:web": "cd web && npm run build",

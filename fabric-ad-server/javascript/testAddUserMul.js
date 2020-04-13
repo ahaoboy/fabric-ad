@@ -57,9 +57,9 @@ async function main() {
 
     for (let i = 0; i < COUNT; i++) {
       let uid = "testAddUser" + i;
+      console.log(uid)
       // const walletPath = path.join(process.cwd(), "wallet");
       // const wallet = await Wallets.newFileSystemWallet(walletPath);
-      console.log(`Wallet path: ${walletPath}`);
       const gateway = new Gateway();
       await gateway.connect(ccp, {
         wallet,

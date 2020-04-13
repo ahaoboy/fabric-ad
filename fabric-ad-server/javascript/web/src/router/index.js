@@ -14,26 +14,26 @@ const routes = [
         name: "MainPage",
         component: MainPage
     },
-    {
-        path: "/MainPage",
-        name: "MainPage",
-        component: MainPage
-    },
-    {
-        path: "/admin",
-        name: "Admin",
-        component: Admin
-    },
-    {
-        path: "/login",
-        name: "Login",
-        component: Login
-    },
-    {
-        path: "/addUser",
-        name: "AddUser",
-        component: AddUser
-    },
+    // {
+    //     path: "/MainPage",
+    //     name: "MainPage",
+    //     component: MainPage
+    // },
+    // {
+    //     path: "/admin",
+    //     name: "Admin",
+    //     component: Admin
+    // },
+    // {
+    //     path: "/login",
+    //     name: "Login",
+    //     component: Login
+    // },
+    // {
+    //     path: "/addUser",
+    //     name: "AddUser",
+    //     component: AddUser
+    // },
 ];
 
 const router = new VueRouter({

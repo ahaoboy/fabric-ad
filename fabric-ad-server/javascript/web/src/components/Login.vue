@@ -39,7 +39,6 @@
     methods: {
       resetForm(user) {
         console.log("resetForm", user);
-
         this[user].uid = "";
         this[user].pwd = "";
       },
@@ -47,17 +46,13 @@
         let {uid, pwd} = this[name];
         console.log("submitForm", uid, pwd);
         //   await addUser(uid, pwd);
-
         let user = await getUser(uid);
-
         if (user.pwd === pwd) {
           localStorage.setItem("uid", uid);
           localStorage.setItem("pwd", pwd);
-
-          this.$router.push("/");
+          this.$emit('login', {pwd, uid})
           return;
         }
-
         console.log("密码错误", user, uid, pwd);
       }
     }

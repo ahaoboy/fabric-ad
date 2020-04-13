@@ -10,7 +10,7 @@
       <el-tab-pane label="注册" name="addUser">
         <addUser @addUser="addUser"></addUser>
       </el-tab-pane>
-      <el-tab-pane label="登录" name="login">
+      <el-tab-pane @login="login" label="登录" name="login">
         <login></login>
       </el-tab-pane>
       <el-tab-pane label="主页" name="click">
@@ -18,6 +18,9 @@
       </el-tab-pane>
       <el-tab-pane label="管理" name="admin">
         <admin></admin>
+      </el-tab-pane>
+      <el-tab-pane label="注销" name="logout">
+        <logout @logout="activeName='login'"></logout>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -28,9 +31,10 @@
   import ClickPage from "./ClickPage";
   import AddUser from "./AddUser";
   import Login from "./Login";
+  import Logout from "./Logout";
 
   const components = {
-    Admin, ClickPage, AddUser, Login
+    Admin, ClickPage, AddUser, Login, Logout
   }
 
   export default {
@@ -41,15 +45,24 @@
       };
     },
     methods: {
+      login(user) {
+        this.activeName = 'click'
+      },
       handleClick(e) {
         console.log(' handleClick e', this.activeName)
         let isLogin = localStorage.getItem('uid')
-        let needVali = ['admin', 'click'].includes(this.activeName)
+        let needVali = ['admin', 'click', 'logout'].includes(this.activeName)
         if (needVali && !isLogin) {
           console.log('need login')
           this.$message('请先进行登录')
           this.$nextTick(
             () => this.activeName = 'addUser'
+          )
+        }
+
+        if (!needVali && isLogin) {
+          this.$nextTick(
+            () => this.activeName = 'click'
           )
         }
       },

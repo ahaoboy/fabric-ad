@@ -66,6 +66,22 @@ app.post("/queryAllStus", async function (req, res) {
 app.post("/addUser", async function (req, res) {
   let {uid, pwd} = req.body;
   sub.next(["submitTransaction", "addUser", uid, pwd]);
+
+
+  let gateway = await getContract();
+  const network = await gateway.getNetwork("mychannel");
+  // Get the contract from the network.
+  let contract = await network.getContract("fabcar");
+
+  let result = await contract.evaluateTransaction("getUser", uid);
+  result = result ? JSON.parse(result.toString()) : false;
+  await gateway.disconnect();
+
+  if (result) {
+    res.json("false");
+  }
+
+
   res.json("ok");
   // let result = await getContract().submitTransaction("addUser", uid, pwd);
   // let result = await getContract.evaluateTransaction("queryAllStus");

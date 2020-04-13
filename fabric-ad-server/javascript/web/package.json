@@ -30,9 +30,13 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
     "rxjs": "^6.5.5",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
     "vue-cli-plugin-element": "~1.0.1",
+    "vue-swipe": "^2.4.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

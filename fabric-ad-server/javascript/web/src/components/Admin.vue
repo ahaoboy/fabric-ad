@@ -55,7 +55,11 @@
         return "success-row";
       },
       async refresh() {
-        this.tableData = await getData();
+        try {
+          this.tableData = await getData();
+        }catch (e) {
+          console.log(e)
+        }
         let gap = 10000;
         this.valiData = new Set();
         let st = this.tableData[0];
@@ -74,10 +78,8 @@
     async created() {
       let uid = localStorage.getItem('uid')
       if (!uid) {
-        this.$router.push('/')
         return
       }
-
       await this.refresh()
     }
   };
