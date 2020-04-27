@@ -37,7 +37,11 @@
     let user = await getUser(uid);
     console.log("user", user);
     let record = user.record;
-    record.clickPosition = `${record.clickX} - ${record.clickY}`
+
+    record.forEach(item=>{
+      item.clickPosition = `(${item.clickX}, ${item.clickY})`
+
+    })
     // record.forEach(item => {
     // item.time = new Date(item.time).toLocaleString();
     // });

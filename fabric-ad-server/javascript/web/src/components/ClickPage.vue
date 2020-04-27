@@ -11,6 +11,7 @@
 
 <script>
   import {addRecord} from "../api";
+  import {getRandomStr} from "../utils";
   // import 'swiper/dist/swiper.css'
   // import 'swiper/css/swiper.css'
 
@@ -56,12 +57,14 @@
         let uid = localStorage.getItem("uid");
         addRecord(uid, {
           aid: this.ad.aid,
-          clickX: e.x,
-          clickY: e.y,
+          clickX: e.layerX,
+          clickY: e.layerY,
           clickUrl: window.location.href
         });
       },
       refresh() {
+        let s = getRandomStr()
+        this.$router.push({path:'/',query:{id:s}});//类似get传参，通过URL传递参数
         this.ad = getAd()
         // this.swiper.slideTo(this.now, 500, false)
       },

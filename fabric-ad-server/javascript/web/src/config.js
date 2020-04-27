@@ -1,6 +1,8 @@
-const HOST = "http://45.32.99.38"
+const IP = "45.77.33.228"
+const HOST = `http://${IP}`
 const PORT = 3000
 export {
   HOST,
-  PORT
+  PORT,
+  IP
 }

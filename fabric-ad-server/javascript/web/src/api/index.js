@@ -26,7 +26,10 @@ export function addRecord(uid, data) {
 
   let url = "/addRecord";
   return axios.post(url,
-    ...data
+    {
+      uid,
+      ...data
+    }
   );
 }
 
