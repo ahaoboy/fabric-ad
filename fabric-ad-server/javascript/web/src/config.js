@@ -1,4 +1,4 @@
-const HOST = "http://45.76.187.50"
+const HOST = "http://45.32.99.38"
 const PORT = 3000
 export {
   HOST,

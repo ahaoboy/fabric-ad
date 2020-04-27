@@ -45,11 +45,19 @@
       async submitForm(name) {
         let {uid, pwd} = this[name];
         console.log("submitForm", uid, pwd);
-        await addUser(uid, pwd);
-        // this.$router.push("/");
-        localStorage.setItem("uid", uid);
-        localStorage.setItem("pwd", pwd);
-        this.$emit('addUser', {uid, pwd})
+
+        let resp = await addUser(uid, pwd);
+        console.log('resp', resp)
+        if (resp) {
+          // this.$router.push("/");
+          localStorage.setItem("uid", uid);
+          localStorage.setItem("pwd", pwd);
+          this.$emit('addUser', {uid, pwd})
+          return
+        }
+
+        this.$message('用户已存在,请直接登录')
+
       }
     }
   };

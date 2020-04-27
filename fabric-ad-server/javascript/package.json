@@ -18,6 +18,7 @@
   "author": "Hyperledger",
   "license": "Apache-2.0",
   "dependencies": {
+    "benchmark": "^2.1.4",
     "express": "^4.17.1",
     "fabric-ca-client": "beta",
     "fabric-network": "beta"

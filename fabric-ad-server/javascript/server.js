@@ -120,11 +120,11 @@ var get_client_ip = function (req) {
 };
 
 app.post("/addRecord", async function (req, res) {
-  let {uid, aid} = req.body;
+  let {uid, ...data} = req.body;
   let record = {
     time: +new Date(),
     ip: get_client_ip(req),
-    aid,
+    ...data
   };
 
   // let result = await getContract().submitTransaction(
@@ -169,7 +169,7 @@ async function main() {
   try {
     // contract = await getContract();
     app.listen(PORT, () =>
-      console.log(`APP URL: ${HOST}:${PORT}/#/addUser`)
+      console.log(`APP URL: ${HOST}:${PORT}/`)
     );
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);

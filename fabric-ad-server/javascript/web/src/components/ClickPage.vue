@@ -51,9 +51,15 @@
       next() {
         this.refresh()
       },
-      click() {
+      click(e) {
+        console.log('e', e)
         let uid = localStorage.getItem("uid");
-        addRecord(uid, this.ad.aid);
+        addRecord(uid, {
+          aid: this.ad.aid,
+          clickX: e.x,
+          clickY: e.y,
+          clickUrl: window.location.href
+        });
       },
       refresh() {
         this.ad = getAd()
@@ -75,7 +81,7 @@
   .swiper-img {
     width: 200px;
     height: 200px;
-    background-repeat: no-repeat  !important;
+    background-repeat: no-repeat !important;
     background-size: cover !important;
   }
 </style>

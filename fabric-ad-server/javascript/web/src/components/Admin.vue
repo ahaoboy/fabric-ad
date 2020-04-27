@@ -13,6 +13,16 @@
         label="时间"
         width="180"
       ></el-table-column>
+      <el-table-column
+        prop="clickUrl"
+        label="地址"
+        width="180"
+      ></el-table-column>
+      <el-table-column
+        prop="clickPosition"
+        label="点击位置"
+        width="180"
+      ></el-table-column>
       <el-table-column prop="ip" label="IP" width="180"></el-table-column>
       <el-table-column prop="aid" label="aid"></el-table-column>
     </el-table>
@@ -27,6 +37,7 @@
     let user = await getUser(uid);
     console.log("user", user);
     let record = user.record;
+    record.clickPosition = `${record.clickX} - ${record.clickY}`
     // record.forEach(item => {
     // item.time = new Date(item.time).toLocaleString();
     // });
@@ -57,7 +68,7 @@
       async refresh() {
         try {
           this.tableData = await getData();
-        }catch (e) {
+        } catch (e) {
           console.log(e)
         }
         let gap = 10000;

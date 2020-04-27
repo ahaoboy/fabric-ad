@@ -14,6 +14,10 @@ const routes = [
         name: "MainPage",
         component: MainPage
     },
+    {
+        path: "/*",
+        redirect:"/"
+    },
     // {
     //     path: "/MainPage",
     //     name: "MainPage",
