@@ -17,7 +17,7 @@ function getIPAdress() {
 
 const fs = require("fs");
 
-const PORT = 3000;
+const PORT = 80;
 const IP = getIPAdress();
 const HOST = `http://${IP}`;
 
